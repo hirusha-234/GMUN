@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <style>
+      /* Style for grayscale images */
+      .grayscale-img {
+        filter: grayscale(100%);
+        opacity: 1;
+      }
+    </style>
 <!--
 
 TemplateMo 586 Scholar
@@ -707,5 +714,22 @@ https://templatemo.com/tm-586-scholar
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
+  
+  <script>
+    // Apply grayscale to images in closed registration items
+    document.addEventListener('DOMContentLoaded', function() {
+      const closedItems = document.querySelectorAll('.events_item .price h6 em');
+      
+      closedItems.forEach(function(item) {
+        if (item.textContent.trim() === 'Closed') {
+          const eventItem = item.closest('.events_item');
+          const image = eventItem.querySelector('.thumb img');
+          if (image) {
+            image.classList.add('grayscale-img');
+          }
+        }
+      });
+    });
+  </script>
   </body>
 </html>
