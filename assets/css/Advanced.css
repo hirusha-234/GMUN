@@ -1,30 +1,4 @@
-/* 
 
-TemplateMo 586 Scholar
-
-https://templatemo.com/tm-586-scholar
-
-*/
-
-/* ---------------------------------------------
-Table of contents
-------------------------------------------------
-01. font & reset css
-02. reset
-03. global styles
-04. header
-05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-
---------------------------------------------- */
-/* 
----------------------------------------------
-font & reset css
---------------------------------------------- 
-*/
 @font-face {
   font-family: 'AkiraExpanded';
   src: url('../fonts/AkiraExpanded.otf') format('opentype');
@@ -117,11 +91,6 @@ img {
   overflow: hidden;
 }
 
-/* 
----------------------------------------------
-Global Styles
---------------------------------------------- 
-*/
 html,
 body {
   font-family: 'Poppins', sans-serif;
@@ -184,11 +153,7 @@ body {
   color: #fff;
 }
 
-/* 
----------------------------------------------
-Pre-loader Style
---------------------------------------------- 
-*/
+
 
 .js-preloader {
   position: fixed;
@@ -285,12 +250,6 @@ Pre-loader Style
 }
 
 
-
-/* 
----------------------------------------------
-Header Style
---------------------------------------------- 
-*/
 
 .background-header {
   background-color: #7a6ad8 !important;
@@ -669,11 +628,6 @@ Header Style
   
 }
 
-/* 
----------------------------------------------
-Banner Style
---------------------------------------------- 
-*/
 
 .main-banner {
   position: relative;
@@ -813,11 +767,7 @@ Banner Style
 }
 
 
-/* 
----------------------------------------------
-Services Style
---------------------------------------------- 
-*/
+
 
 .services .service-item:hover .icon img {
   margin-top: -10px;
@@ -868,11 +818,7 @@ Services Style
   margin-bottom: 25px;
 }
 
-/* 
----------------------------------------------
-About Style
---------------------------------------------- 
-*/
+
 
 .about-us {
   position: relative;
@@ -965,11 +911,6 @@ h2.accordion-header button {
 }
 
 
-/* 
----------------------------------------------
-Courses Style
---------------------------------------------- 
-*/
 
 .courses {
   margin-top: 160px;
@@ -1094,12 +1035,6 @@ Courses Style
 }
 
 
-/* 
----------------------------------------------
-Facts Style
---------------------------------------------- 
-*/
-
 .fun-facts {
   position: relative;
   padding: 120px 0px 80px 0px;
@@ -1156,11 +1091,7 @@ Facts Style
 }
 
 
-/* 
----------------------------------------------
-Team Style
---------------------------------------------- 
-*/
+
 
 .team {
   margin-top: 100px;
@@ -1227,12 +1158,6 @@ Team Style
   color: #fff;
 }
 
-
-/* 
----------------------------------------------
-Testimonials Style
---------------------------------------------- 
-*/
 
 .testimonials {
   position: relative;
@@ -1335,11 +1260,7 @@ Testimonials Style
 }
 
 
-/* 
----------------------------------------------
-Events Style
---------------------------------------------- 
-*/
+
 
 .events .section-heading {
   margin-bottom: 100px;
@@ -1426,11 +1347,6 @@ Events Style
 }
 
 
-/* 
----------------------------------------------
-Contact Style
---------------------------------------------- 
-*/
 
 .contact-us {
   margin-top: 80px;
@@ -1648,11 +1564,7 @@ Contact Style
   font-weight: 400;
 }
 
-/* 
----------------------------------------------
-Footer Style
---------------------------------------------- 
-*/
+
 
 footer {
   margin-top: 150px;
@@ -1694,11 +1606,6 @@ footer::before {
   z-index: 2;
 }
 
-/* 
----------------------------------------------
-Responsive Style
---------------------------------------------- 
-*/
 
 body {
   overflow-x: hidden;
