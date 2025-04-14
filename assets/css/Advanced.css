@@ -7,7 +7,7 @@
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
-/* 
+
 ---------------------------------------------
 reset
 --------------------------------------------- 
@@ -78,6 +78,51 @@ h1, h2, h3, h4, h5, h6 {
 
 ul {
   margin-bottom: 0px;
+}
+
+.grayscale-img {
+  filter: grayscale(100%);
+  opacity: 1;
+}
+
+.social-links {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.social-icons-large {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.social-icons-large li {
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.social-icons-large li a {
+  color: #7a6ad8;
+  background-color: #fefeff;
+  border-radius: 25px;
+  padding: 12px 20px;
+  display: inline-block;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.social-icons-large li a:hover {
+  color: #fff;
+  background-color: #7a6ad8;
+  transform: translateY(-3px);
+}
+
+.social-icons-large li a i {
+  margin-right: 8px;
 }
 
 p {
