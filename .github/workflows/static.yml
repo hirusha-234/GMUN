@@ -1,0 +1,75 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+            - name: Issue SSL certificate
+  # You may pin to the exact commit or the version.
+  # uses: Menci/acme@e9a01794f5b5f5feaf07f08f9d61417ab9ba022b
+  uses: Menci/acme@v2
+  with:
+    # The version of acme.sh. By default the latest version is used.
+    version: # optional, default is 
+    # (Deprecated, please use "account-tar") The text content of your `account.conf`, should be stored in secrets. If not specfied you should provide your DNS API token with environment variables.
+    account-conf-content: # optional, default is 
+    # Base64 encoded tar file content of your account files in `~/.acme.sh` (i.e. output of `tar cz ca account.conf | base64 -w0` in your `~/.acme.sh` directory).
+    account-tar: # optional, default is 
+    # The list of domains you want to issue certificate for. Separated by any blank characters (allowing newlines). Overrided by `domains-file` field.
+    domains: # optional, default is 
+    # The file containing a list of domains you want to issue certificate for. Separated by any blank characters (allowing newlines). Overrides `domains` field.
+    domains-file: # optional, default is 
+    # Whether to add a wildcard entry for each of your domain in `domains`.
+    append-wildcard: # optional, default is true
+    # The arguments to pass to acme.sh (will be prepended to all `-d domain.name` items). The first argument `--issue` should be omitted. For example `--dns dns_cf --challenge-alias example.com`. Overrided by `arguments-file` field.
+    arguments: # optional, default is 
+    # The file containing arguments to pass to acme.sh (will be prepended to all `-d domain.name` items). The first argument `--issue` should be omitted. For example `--dns dns_cf --challenge-alias example.com`. Overrides `arguments` field.
+    arguments-file: # optional, default is 
+    # The target path for the issued certificate's fullchain PEM file. Omit if you don't need.
+    output-fullchain: # optional, default is 
+    # The target path for the issued certificate's private key PEM file. Omit if you don't need.
+    output-key: # optional, default is 
+    # The target path for the issued certificate's PKCS#12 certificate file. Please also specify the `output-pfx-password` option. Omit if you don't need.
+    output-pfx: # optional, default is 
+    # The password for the output PKCS#12 certificate file. Ignored when `output-pfx` is not specfied.
+    output-pfx-password: # optional, default is 
+    # Whether or not to uninstall acme.sh after running this action. Use `false` to keep.
+    uninstall: # optional, default is true
+          
