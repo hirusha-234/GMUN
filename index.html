@@ -30,6 +30,43 @@
           box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
         }
       }
+      /* Advertisement styles with swipe-up animations */
+      @keyframes swipeUpOut {
+        from { bottom: 1%; opacity: 1; }
+        to { bottom: 38%; opacity: 0; }
+      }
+
+      @keyframes swipeUpIn {
+        from { bottom: -100%; opacity: 0; }
+        to { bottom: 1%; opacity: 1; }
+      }
+
+      .ad-container {
+        position: fixed;
+        bottom: 1%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 300px;
+        background-color: white;
+        border: 2px solid white;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000;
+      }
+      .ad-container img {
+        width: 100%;
+        border-radius: 15px;
+      }
+      .ad-close {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #333;
+      }
     </style>
 
   </head>
@@ -723,6 +760,45 @@
           }
         }
       });
+    });
+  </script>
+
+  <div class="ad-container" id="adContainer">
+    <span class="ad-close" id="adClose">&times;</span>
+    <img src="assets/images/ad1.png" alt="Advertisement" id="adImage">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const adContainer = document.getElementById('adContainer');
+      const adClose = document.getElementById('adClose');
+      const adImage = document.getElementById('adImage');
+      const adImages = [
+        'assets/images/ad1.png',
+        'assets/images/ad2.png',
+        'assets/images/ad3.png'
+      ];
+      let adIndex = Math.floor(Math.random() * adImages.length); // Start with a random ad
+
+      function showAd() {
+        adImage.src = adImages[adIndex];
+        adContainer.style.display = 'block';
+        adContainer.style.animation = 'swipeUpIn 0.5s forwards';
+        adIndex = (adIndex + 1) % adImages.length;
+      }
+
+      function hideAd() {
+        adContainer.style.display = 'none';
+      }
+
+      function transitionAd() {
+        adContainer.style.animation = 'swipeUpOut 0.5s forwards';
+        setTimeout(showAd, 500); // Show the new ad after the swipe-up animation
+      }
+
+      adClose.addEventListener('click', hideAd);
+
+      setInterval(transitionAd, 40000); // Transition ad every 40 seconds
     });
   </script>
   </body>
