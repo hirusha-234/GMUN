@@ -67,7 +67,29 @@
         font-size: 18px;
         color: #333;
       }
-      */
+
+      /* Purple dot cursor follower */
+      .cursor-dot {
+        width: 20px;
+        height: 20px;
+        background-color: #8A2BE2;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Motion transform styles */
+      .motion-transform {
+        transition: transform 0.2s ease-out;
+        will-change: transform;
+      }
+
+      .motion-transform:hover {
+        transform: translate(var(--tx), var(--ty)) scale(1.02);
+      }
     </style>
 
   </head>
@@ -362,7 +384,7 @@
                 <img src="assets/images/course-01.jpg" alt="School Registration">
               </a>
               <span class="category">Delegate</span>
-              <span class="price"><h6><em>Open</em></h6></span>
+              <span class="price"><h6><em>Closed</em></h6></span>
             </div>
             <div class="down-content">
               <span class="author">Rs. 2750</span>
@@ -379,7 +401,7 @@
                 <img src="assets/images/course-02.jpg" alt="Private Registration">
               </a>
               <span class="category">Private Delegate</span>
-              <span class="price"><h6><em>Open</em></h6></span>
+              <span class="price"><h6><em>Closed</em></h6></span>
             </div>
             <div class="down-content">
               <span class="author">Rs. 2750</span>
@@ -396,7 +418,7 @@
                 <img src="assets/images/course-03.jpg" alt="Admin Registration">
               </a>
               <span class="category">Admin</span>
-              <span class="price"><h6><em>Open</em></h6></span>
+              <span class="price"><h6><em>Closed</em></h6></span>
             </div>
             <div class="down-content">
               <span class="author">Rs. 1500</span>
@@ -900,6 +922,81 @@
           }
         }
       });
+
+      // Intersection Observer for counter animation
+      const counterSection = document.querySelector('.fun-facts');
+      const counters = document.querySelectorAll('.count-number');
+      let counted = false;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            counters.forEach(counter => {
+              const target = parseInt(counter.getAttribute('data-to'));
+              const speed = parseInt(counter.getAttribute('data-speed'));
+              let count = 0;
+              const updateCount = () => {
+                const increment = target / (speed / 16);
+                if (count < target) {
+                  count += increment;
+                  counter.textContent = Math.ceil(count);
+                  requestAnimationFrame(updateCount);
+                } else {
+                  counter.textContent = target;
+                }
+              };
+              updateCount();
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(counterSection);
+
+      // Check if device has mouse input
+      const hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      
+      if (hasMouse) {
+        // Purple dot cursor follower
+        const cursorDot = document.getElementById('cursorDot');
+        cursorDot.style.display = 'block'; // Show cursor dot only on mouse devices
+        
+        document.addEventListener('mousemove', function(e) {
+          cursorDot.style.left = e.clientX + 'px';
+          cursorDot.style.top = e.clientY + 'px';
+
+          // Motion transform effect
+          const x = (e.clientX / window.innerWidth - 0.5) * 20;
+          const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+          // Apply motion to all sections and cards
+          document.querySelectorAll('.section, .service-item, .events_item, .team-member, .item').forEach(element => {
+            element.classList.add('motion-transform');
+            element.style.setProperty('--tx', `${x}px`);
+            element.style.setProperty('--ty', `${y}px`);
+          });
+        });
+
+        // Add hover effect
+        document.addEventListener('mouseover', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+          }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+          }
+        });
+      } else {
+        // Hide cursor dot on touch devices
+        const cursorDot = document.getElementById('cursorDot');
+        if (cursorDot) {
+          cursorDot.style.display = 'none';
+        }
+      }
     });
   </script>
 
@@ -941,5 +1038,54 @@
       setInterval(transitionAd, 40000); // Transition ad every 40 seconds
     });
   </script>
+
+  <div class="cursor-dot" id="cursorDot"></div>
   </body>
 </html>
+      }
+    });
+  </script>
+
+  <div class="ad-container" id="adContainer">
+    <span class="ad-close" id="adClose">&times;</span>
+    <img src="assets/images/ad1.png" alt="Advertisement" id="adImage">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const adContainer = document.getElementById('adContainer');
+      const adClose = document.getElementById('adClose');
+      const adImage = document.getElementById('adImage');
+      const adImages = [
+        'assets/images/ad1.png',
+        'assets/images/ad2.png',
+        'assets/images/ad3.png'
+      ];
+      let adIndex = Math.floor(Math.random() * adImages.length); // Start with a random ad
+
+      function showAd() {
+        adImage.src = adImages[adIndex];
+        adContainer.style.display = 'block';
+        adContainer.style.animation = 'swipeUpIn 0.5s forwards';
+        adIndex = (adIndex + 1) % adImages.length;
+      }
+
+      function hideAd() {
+        adContainer.style.display = 'none';
+      }
+
+      function transitionAd() {
+        adContainer.style.animation = 'swipeUpOut 0.5s forwards';
+        setTimeout(showAd, 500); // Show the new ad after the swipe-up animation
+      }
+
+      adClose.addEventListener('click', hideAd);
+
+      setInterval(transitionAd, 40000); // Transition ad every 40 seconds
+    });
+  </script>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  </body>
+</html>
+
