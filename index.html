@@ -909,8 +909,8 @@
   <script src="assets/js/custom.js"></script>
   
   <script>
-    // Apply grayscale to images in closed registration items
     document.addEventListener('DOMContentLoaded', function() {
+      // Apply grayscale to images in closed registration items
       const closedItems = document.querySelectorAll('.events_item .price h6 em');
       
       closedItems.forEach(function(item) {
@@ -960,88 +960,44 @@
       if (hasMouse) {
         // Purple dot cursor follower
         const cursorDot = document.getElementById('cursorDot');
-        cursorDot.style.display = 'block'; // Show cursor dot only on mouse devices
-        
-        document.addEventListener('mousemove', function(e) {
-          cursorDot.style.left = e.clientX + 'px';
-          cursorDot.style.top = e.clientY + 'px';
+        if (cursorDot) {
+          cursorDot.style.display = 'block'; // Show cursor dot only on mouse devices
+          
+          document.addEventListener('mousemove', function(e) {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
 
-          // Motion transform effect
-          const x = (e.clientX / window.innerWidth - 0.5) * 20;
-          const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            // Motion transform effect
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-          // Apply motion to all sections and cards
-          document.querySelectorAll('.section, .service-item, .events_item, .team-member, .item').forEach(element => {
-            element.classList.add('motion-transform');
-            element.style.setProperty('--tx', `${x}px`);
-            element.style.setProperty('--ty', `${y}px`);
+            // Apply motion to all sections and cards
+            document.querySelectorAll('.section, .service-item, .events_item, .team-member, .item').forEach(element => {
+              element.classList.add('motion-transform');
+              element.style.setProperty('--tx', `${x}px`);
+              element.style.setProperty('--ty', `${y}px`);
+            });
           });
-        });
 
-        // Add hover effect
-        document.addEventListener('mouseover', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-          }
-        });
+          // Add hover effect
+          document.addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            }
+          });
 
-        document.addEventListener('mouseout', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-          }
-        });
+          document.addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+            }
+          });
+        }
       } else {
         // Hide cursor dot on touch devices
         const cursorDot = document.getElementById('cursorDot');
         if (cursorDot) {
           cursorDot.style.display = 'none';
         }
-      }
-    });
-  </script>
-
-  <div class="ad-container" id="adContainer">
-    <span class="ad-close" id="adClose">&times;</span>
-    <img src="assets/images/ad1.png" alt="Advertisement" id="adImage">
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const adContainer = document.getElementById('adContainer');
-      const adClose = document.getElementById('adClose');
-      const adImage = document.getElementById('adImage');
-      const adImages = [
-        'assets/images/ad1.png',
-        'assets/images/ad2.png',
-        'assets/images/ad3.png'
-      ];
-      let adIndex = Math.floor(Math.random() * adImages.length); // Start with a random ad
-
-      function showAd() {
-        adImage.src = adImages[adIndex];
-        adContainer.style.display = 'block';
-        adContainer.style.animation = 'swipeUpIn 0.5s forwards';
-        adIndex = (adIndex + 1) % adImages.length;
-      }
-
-      function hideAd() {
-        adContainer.style.display = 'none';
-      }
-
-      function transitionAd() {
-        adContainer.style.animation = 'swipeUpOut 0.5s forwards';
-        setTimeout(showAd, 500); // Show the new ad after the swipe-up animation
-      }
-
-      adClose.addEventListener('click', hideAd);
-
-      setInterval(transitionAd, 40000); // Transition ad every 40 seconds
-    });
-  </script>
-
-  <div class="cursor-dot" id="cursorDot"></div>
-  </body>
-</html>
       }
     });
   </script>
